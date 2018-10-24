@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handlers users delete correctly deletes user 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "deleteCustomer
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users delete fails and returns error, when deleteCustomer throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "deleteCustomer
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users delete fails and returns error, when loadStripe throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;

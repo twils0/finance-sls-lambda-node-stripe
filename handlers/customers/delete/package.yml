@@ -1,0 +1,8 @@
+include:
+  - handlers/customers/delete/handler.js
+  - functions/aws/aws.config.json
+  - functions/aws/getSecret.js
+  - functions/stripe/loadStripe.js
+  - functions/stripe/deleteCustomer.js
+  - functions/errorResponse.js
+  

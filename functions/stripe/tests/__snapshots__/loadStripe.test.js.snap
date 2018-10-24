@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`functions db loadStripe correctly loads stripe 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "Stripe Loaded
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`functions db loadStripe fails and returns unexpected error, when getSecret does not return a value 1`] = `[TypeError: Cannot destructure property \`value\` of 'undefined' or 'null'.]`;

@@ -1,0 +1,15 @@
+include:
+  - handlers/customers/put/handler.js
+  - functions/aws/aws.config.json
+  - functions/aws/testAuth.js
+  - functions/aws/getSecret.js
+  - functions/aws/testUser.js
+  - functions/stripe/loadStripe.js  
+  - functions/stripe/getCustomer.js
+  - functions/stripe/updateCustomer.js
+  - functions/stripe/testCoupon.js
+  - functions/stripe/updateSubscription.js
+  - functions/stripe/deleteDiscount.js
+  - functions/stripe/deleteSubscription.js
+  - functions/stripe/addSubscription.js
+  - functions/errorResponse.js

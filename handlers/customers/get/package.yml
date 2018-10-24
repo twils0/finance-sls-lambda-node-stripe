@@ -1,0 +1,9 @@
+include:
+  - handlers/customers/get/handler.js
+  - functions/aws/aws.config.json
+  - functions/aws/testAuth.js
+  - functions/aws/getSecret.js
+  - functions/stripe/loadStripe.js
+  - functions/stripe/getCustomer.js
+  - functions/errorResponse.js
+  

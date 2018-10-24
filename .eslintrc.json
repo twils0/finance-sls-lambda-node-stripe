@@ -1,0 +1,32 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "prefer-promise-reject-errors": "off",
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["%", "**"],
+          ["%", "+"],
+          ["%", "-"],
+          ["%", "*"],
+          ["%", "/"],
+          ["**", "+"],
+          ["**", "-"],
+          ["**", "*"],
+          ["**", "/"],
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": false
+      }
+    ]
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "secretsManager": {
+    "region": "us-east-1"
+  },
+  "cognito": {
+    "region": "us-east-1",
+    "userPoolId": "us-east- ..."
+  },
+  "sns": {
+    "arn": "arn:aws:sns:us-east-1: ..."
+  }
+}

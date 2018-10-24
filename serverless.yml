@@ -1,0 +1,147 @@
+service: sls-lambda-stripe
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: serverless-admin
+  region: us-east-1
+  memorySize: 128
+  role: slsLambdaStripeRole
+  stage: prod
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: 'pay.example.com'
+    stage: 'prod'
+    createRoute53Record: true
+  paths:
+    customers: '/customers'
+  cors:
+    origin: '*'
+  arns:
+    cognito: 'arn:aws:cognito-idp:us-east-1: ...'
+
+package:
+  individually: true
+  exclude:
+    - functions/**
+    - handlers/**
+    - package-lock.json
+    - package.json
+
+functions:
+  postCustomers:
+    handler: handlers/customers/post/handler.post
+    package: ${file(./handlers/customers/post/package.yml)}
+    role: slsLambdaStripeSnsCognitoRole
+    events:
+      - http:
+          path: ${self:custom.paths.customers}
+          method: post
+          cors: ${self:custom.cors}
+          integration: lambda
+
+  putCustomers:
+    handler: handlers/customers/put/handler.put
+    package: ${file(./handlers/customers/put/package.yml)}
+    role: slsStripeCognitoRole
+    events:
+      - http:
+          path: ${self:custom.paths.customers}
+          method: put
+          cors: ${self:custom.cors}
+          integration: lambda
+          authorizer:
+            arn: ${self:custom.arns.cognito}
+            claims:
+              - custom:stripe_customer_id
+
+  getCustomers:
+    handler: handlers/customers/get/handler.get
+    package: ${file(./handlers/customers/get/package.yml)}
+    events:
+      - http:
+          path: ${self:custom.paths.customers}
+          method: get
+          cors: ${self:custom.cors}
+          integration: lambda
+          authorizer:
+            arn: ${self:custom.arns.cognito}
+            claims:
+              - custom:stripe_customer_id
+
+  deleteCustomers:
+    handler: handlers/customers/delete/handler.delete
+    package: ${file(./handlers/customers/delete/package.yml)}
+    events:
+      - http:
+          path: ${self:custom.paths.customers}
+          method: delete
+          cors: ${self:custom.cors}
+          integration: lambda
+          authorizer:
+            arn: ${self:custom.arns.cognito}
+            claims:
+              - custom:stripe_customer_id
+
+resources:
+  Resources:
+    slsLambdaStripeRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: slsLambdaStripeRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+          - arn:aws:iam::576993442430:policy/cloudwatch_logs_write
+          - arn:aws:iam::576993442430:policy/secrets_manager_sls_lambda_stripe_read
+
+    slsLambdaStripeSnsCognitoRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: slsLambdaStripeSnsCognitoRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+          - arn:aws:iam::576993442430:policy/cloudwatch_logs_write
+          - arn:aws:iam::576993442430:policy/secrets_manager_sls_lambda_stripe_read
+          - arn:aws:iam::576993442430:policy/sns_lambda_stripe_post_write
+          - arn:aws:iam::576993442430:policy/cognito_lambda_user_pool_read_write
+
+    slsLambdaStripeCognitoRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: slsLambdaStripeCognitoRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+          - arn:aws:iam::576993442430:policy/cloudwatch_logs_write
+          - arn:aws:iam::576993442430:policy/secrets_manager_sls_lambda_stripe_read
+          - arn:aws:iam::576993442430:policy/cognito_lambda_user_pool_read_write
