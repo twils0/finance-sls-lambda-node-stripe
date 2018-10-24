@@ -1,0 +1,48 @@
+{
+  "name": "finance-sls-lambda-node-stripe",
+  "version": "0.1.0",
+  "description": "payment processing using stripe and lambda functions, managed by serverless",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+<<<<<<< HEAD
+    "url": "git+https://github.com/twils0/sls_dynalogic_stripe.git"
+=======
+    "url": "https://github.com/twils0/finance-sls-lambda-node-stripe.git"
+>>>>>>> d9dac27... cloned stripe lambda functions from finance project
+  },
+  "author": "Tyler Wilson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twils0/finance-sls-lambda-node-stripe/issues"
+  },
+  "homepage": "https://github.com/twils0/finance-sls-lambda-node-stripe#readme",
+  "dependencies": {
+    "stripe": "^5.5.0"
+  },
+  "devDependencies": {
+<<<<<<< HEAD
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-babel": "^5.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "serverless-domain-manager": "^2.3.6"
+=======
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-babel": "^5.2.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "mockdate": "^2.0.2",
+    "serverless-domain-manager": "^2.6.5"
+>>>>>>> d9dac27... cloned stripe lambda functions from finance project
+  }
+}

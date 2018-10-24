@@ -1,0 +1,12 @@
+include:
+  - handlers/customers/post/handler.js
+  - functions/aws/aws.config.json  
+  - functions/aws/getSecret.js
+  - functions/aws/testUser.js
+  - functions/aws/sns/publishSNS.js
+  - functions/stripe/loadStripe.js
+  - functions/stripe/testCoupon.js
+  - functions/stripe/addCustomer.js
+  - functions/stripe/addSubscription.js
+  - functions/errorResponse.js
+  
