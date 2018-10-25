@@ -4,15 +4,9 @@ module.exports.testCoupon = async (couponId) => {
 
   try {
     const couponObject = await new Promise((resolve, reject) => {
-<<<<<<< HEAD
-      stripe.coupons.list({}, (errorThen, response) => {
-        if (errorThen) {
-          reject(errorThen);
-=======
       global.stripe.coupons.list({}, (errorCallback, response) => {
         if (errorCallback) {
           reject(errorCallback);
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
         } else {
           resolve(response);
         }

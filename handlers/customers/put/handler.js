@@ -17,18 +17,16 @@ module.exports.put = async (event, context, callback) => {
   const { accessToken } = event.query;
 
   try {
-<<<<<<< HEAD
     await testAuth(accessToken);
-=======
-    await loadStripe();
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
   } catch (errorCatch) {
     error = errorCatch;
   }
 
-  if (!stripe) {
+  if (!error) {
     try {
-      ({ stripe } = await loadStripe());
+      console.log('loadStripe\n');
+
+      await loadStripe();
     } catch (errorCatch) {
       error = errorCatch;
     }
@@ -68,7 +66,7 @@ module.exports.put = async (event, context, callback) => {
       try {
         console.log('getCustomer\n', customerId, '\n');
 
-        ({ sourceId, subscriptionId, subscriptionItemId } = await getCustomer(stripe, customerId));
+        ({ sourceId, subscriptionId, subscriptionItemId } = await getCustomer(customerId));
 
         console.log(
           'getCustomer - success\n',
@@ -95,7 +93,7 @@ module.exports.put = async (event, context, callback) => {
       try {
         console.log('updateCustomer\n', customerId, '\n', body, '\n');
 
-        await updateCustomer(stripe, customerId, body);
+        await updateCustomer(customerId, body);
       } catch (errorCatch) {
         error = errorCatch;
       }
@@ -107,16 +105,8 @@ module.exports.put = async (event, context, callback) => {
       console.log('getCustomer\n', customerId, '\n');
 
       ({
-<<<<<<< HEAD
-        sourceId, subscriptionId, subscriptionItemId, couponId, plan,
-      } = await getCustomer(
-        stripe,
-        customerId,
-      ));
-=======
         sourceId, subscriptionId, couponId, plan,
       } = await getCustomer(customerId));
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
 
       console.log(
         'getCustomer - success\n',
@@ -148,19 +138,6 @@ module.exports.put = async (event, context, callback) => {
     try {
       console.log('updateSubscription\n', subscriptionId, '\n', body, '\n');
 
-<<<<<<< HEAD
-      await updateSubscription(stripe, subscriptionId, body);
-    } catch (errorCatch) {
-      error = errorCatch;
-    }
-  } else if (!error && couponId) {
-    try {
-      console.log('deleteDiscount\n', subscriptionId, '\n');
-
-      await deleteDiscount(stripe, subscriptionId);
-    } catch (errorCatch) {
-      error = errorCatch;
-=======
       await updateCustomer(customerId, body);
     } catch (errorCatch) {
       error = errorCatch;
@@ -188,7 +165,6 @@ module.exports.put = async (event, context, callback) => {
       } catch (errorCatch) {
         error = errorCatch;
       }
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
     }
   }
 

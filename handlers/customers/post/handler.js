@@ -11,6 +11,8 @@ module.exports.post = async (event, context, callback) => {
   let error = null;
 
   try {
+    console.log('loadStripe\n');
+
     await loadStripe();
   } catch (errorCatch) {
     error = errorCatch;

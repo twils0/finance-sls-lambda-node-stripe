@@ -7,11 +7,7 @@
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
-    "url": "git+https://github.com/twils0/sls_dynalogic_stripe.git"
-=======
     "url": "https://github.com/twils0/finance-sls-lambda-node-stripe.git"
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
   },
   "author": "Tyler Wilson",
   "license": "ISC",
@@ -23,16 +19,6 @@
     "stripe": "^5.5.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "babel-eslint": "^8.2.2",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-babel": "^5.0.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "serverless-domain-manager": "^2.3.6"
-=======
     "babel-eslint": "^8.2.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -43,6 +29,5 @@
     "jest": "^23.6.0",
     "mockdate": "^2.0.2",
     "serverless-domain-manager": "^2.6.5"
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
   }
 }

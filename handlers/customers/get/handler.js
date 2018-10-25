@@ -9,18 +9,16 @@ module.exports.get = async (event, context, callback) => {
   const { accessToken } = event.query;
 
   try {
-<<<<<<< HEAD
     await testAuth(accessToken);
-=======
-    await loadStripe();
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
   } catch (errorCatch) {
     error = errorCatch;
   }
 
-  if (!stripe) {
+  if (!error) {
     try {
-      ({ stripe } = await loadStripe());
+      console.log('loadStripe\n');
+
+      await loadStripe();
     } catch (errorCatch) {
       error = errorCatch;
     }

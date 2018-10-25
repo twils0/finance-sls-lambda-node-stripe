@@ -10,15 +10,9 @@ module.exports.addCustomer = async (payload) => {
 
   try {
     const customer = await new Promise((resolve, reject) => {
-<<<<<<< HEAD
-      stripe.customers.create(stripePayload, (error, response) => {
-        if (error) {
-          reject(error);
-=======
       global.stripe.customers.create(stripePayload, (errorCallback, response) => {
         if (errorCallback) {
           reject(errorCallback);
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
         } else {
           resolve(response);
         }
