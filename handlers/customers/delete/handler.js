@@ -1,3 +1,4 @@
+const { testAuth } = require('../../../functions/aws/testAuth');
 const { loadStripe } = require('../../../functions/stripe/loadStripe');
 const { deleteCustomer } = require('../../../functions/stripe/deleteCustomer');
 const { errorResponse } = require('../../../functions/errorResponse');
@@ -5,22 +6,22 @@ const { errorResponse } = require('../../../functions/errorResponse');
 // delete customer
 module.exports.delete = async (event, context, callback) => {
   let error = null;
+  const { accessToken } = event.query;
 
-<<<<<<< HEAD
-  if (!stripe) {
+  try {
+    await testAuth(accessToken);
+  } catch (errorCatch) {
+    error = errorCatch;
+  }
+
+  if (!error) {
     try {
-      ({ stripe } = await loadStripe());
+      console.log('loadStripe\n');
+
+      await loadStripe();
     } catch (errorCatch) {
       error = errorCatch;
     }
-=======
-  try {
-    console.log('loadStripe\n');
-
-    await loadStripe();
-  } catch (errorCatch) {
-    error = errorCatch;
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
   }
 
   const customerId = event.cognitoPoolClaims.stripe_customer_id;

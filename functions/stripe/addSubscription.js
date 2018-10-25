@@ -5,13 +5,9 @@ module.exports.addSubscription = async (customerId, payload) => {
   let subscriptionItemId = null;
   let stripePayload = null;
 
-<<<<<<< HEAD
-  if (payload.plan === 'Basic_300') {
-=======
-  // only currently offer basic_plan, billed quarterly
+  // only offer basic_plan currently, billed quarterly
   // and prorated for the first quarter
   if (payload.plan === 'basic_plan') {
->>>>>>> d9dac27... cloned stripe lambda functions from finance project
     const currentDate = new Date();
 
     const month = currentDate.getUTCMonth();
