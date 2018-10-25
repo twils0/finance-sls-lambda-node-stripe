@@ -15,8 +15,8 @@ HTTP Methods Available:
   - if provided, a promo code is verified and added to the subscription plan;
   - finally, an SNS message is published to a topic that finance-sls-lambda-node-db subscribes to; finance-sls-lambda-node-db finishes signing up the user
 
-- GET: retreives a user's Stripe information;
+- GET: retreives the user's Stripe information;
 
-- PUT: updates a user's Stripe information;
+- PUT: updates the user's Stripe information;
 
-- DELETE: deletes a user's Stripe information;
+- DELETE: deletes the user's Stripe information;
