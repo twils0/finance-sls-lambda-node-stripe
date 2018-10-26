@@ -1,6 +1,6 @@
 {
   "name": "finance-sls-lambda-node-stripe",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "api to handle stripe workflows, using aws lambda functions (node), managed by serverless",
   "author": "twils0",
   "repository": {

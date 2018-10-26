@@ -16,13 +16,13 @@ module.exports.addSubscription = async (customerId, payload) => {
     const newDay = 16;
 
     if (month >= 0 && month < 3) {
-      newMonth = 3;
-    } else if (month >= 3 && month < 6) {
-      newMonth = 6;
-    } else if (month >= 6 && month < 9) {
-      newMonth = 9;
-    } else if (month >= 9 && month < 12) {
       newMonth = 0;
+    } else if (month >= 3 && month < 6) {
+      newMonth = 3;
+    } else if (month >= 6 && month < 9) {
+      newMonth = 6;
+    } else if (month >= 9 && month < 12) {
+      newMonth = 9;
     }
 
     if (!newMonth) {

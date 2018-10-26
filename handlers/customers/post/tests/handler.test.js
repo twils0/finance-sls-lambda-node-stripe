@@ -32,7 +32,7 @@ jest.mock('../../../../functions/errorResponse', () => ({
 
 const token = { test: 'testToken ' };
 const promoCode = 'testPromoCode';
-const plan = 'Basic_450';
+const plan = 'basic_plan';
 const email = 'test@test.com';
 const password = 'testPassword1!';
 const name = 'testName';
@@ -106,6 +106,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(callback).toBeCalledWith(error, response);
         expect(global.console.log).toMatchSnapshot();
       });
@@ -123,6 +124,7 @@ describe('handlers', () => {
 
         await post(emptyEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -141,6 +143,7 @@ describe('handlers', () => {
 
         await post(wrongEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -160,6 +163,7 @@ describe('handlers', () => {
 
         await post(wrongEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -180,6 +184,7 @@ describe('handlers', () => {
 
         await post(wrongEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -201,6 +206,7 @@ describe('handlers', () => {
 
         await post(wrongEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -223,6 +229,7 @@ describe('handlers', () => {
 
         await post(wrongEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(global.console.log).toMatchSnapshot();
       });
 
@@ -236,6 +243,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(callback).toBeCalledWith(error, response);
         expect(global.console.log).toMatchSnapshot();
@@ -252,6 +260,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(callback).toBeCalledWith(error, response);
         expect(global.console.log).toMatchSnapshot();
@@ -269,6 +278,7 @@ describe('handlers', () => {
 
         await post(noPromoCodeEvent, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(testCoupon).not.toBeCalled();
         expect(addCustomer).toBeCalledWith(noPasswordNoPromoCodeEventBody);
@@ -289,6 +299,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(testCoupon).toBeCalled();
         expect(addCustomer).toBeCalledWith(noPasswordEventBody);
@@ -311,6 +322,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(testCoupon).toBeCalled();
         expect(addCustomer).toBeCalledWith(noPasswordEventBody);
@@ -330,6 +342,7 @@ describe('handlers', () => {
 
         await post(event, null, callback);
 
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email);
         expect(testCoupon).toBeCalled();
         expect(addCustomer).toBeCalledWith(noPasswordEventBody);
