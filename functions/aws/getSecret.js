@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk'); // eslint-disable-line
 const awsConfig = require('./aws.config.json');
 
-// retreive a secret from AWS Secrets Manager
+// retreive a secret from Secrets Manager
 module.exports.getSecret = async (key) => {
   // keep as a global variable, to avoid
   // reloading for each call to a lambda instance

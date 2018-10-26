@@ -1,6 +1,6 @@
 const { getSecret } = require('../aws/getSecret');
 
-// retreive Stripe API key from AWS Secrets Manager
+// retreive Stripe API key from Secrets Manager
 module.exports.loadStripe = async () => {
   if (!global.stripe) {
     try {

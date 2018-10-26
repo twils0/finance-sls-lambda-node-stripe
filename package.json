@@ -1,6 +1,6 @@
 {
   "name": "finance-sls-lambda-node-stripe",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "payment processing using stripe and lambda functions, managed by serverless",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
