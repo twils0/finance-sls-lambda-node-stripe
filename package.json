@@ -1,20 +1,29 @@
 {
   "name": "finance-sls-lambda-node-stripe",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "api to handle stripe workflows, using aws lambda functions (node), managed by serverless",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "twils0",
   "repository": {
     "type": "git",
     "url": "https://github.com/twils0/finance-sls-lambda-node-stripe.git"
   },
-  "author": "Tyler Wilson",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/twils0/finance-sls-lambda-node-stripe/issues"
   },
   "homepage": "https://github.com/twils0/finance-sls-lambda-node-stripe#readme",
+  "scripts": {
+    "test": "jest",
+    "test_watch": "jest --watch"
+  },
+  "jest": {
+    "verbose": true,
+    "roots": [
+      "<rootDir>"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ]
+  },
   "dependencies": {
     "stripe": "^5.5.0"
   },
