@@ -1,5 +1,5 @@
-const { loadStripe } = require('../../../../functions/stripe/loadStripe');
 const { testAuth } = require('../../../../functions/aws/testAuth');
+const { loadStripe } = require('../../../../functions/stripe/loadStripe');
 const { testUser } = require('../../../../functions/aws/testUser');
 const { testCoupon } = require('../../../../functions/stripe/testCoupon');
 const { getCustomer } = require('../../../../functions/stripe/getCustomer');
@@ -12,11 +12,11 @@ const { addSubscription } = require('../../../../functions/stripe/addSubscriptio
 const { put } = require('../handler');
 
 global.console.log = jest.fn();
-jest.mock('../../../../functions/stripe/loadStripe', () => ({
-  loadStripe: jest.fn(),
-}));
 jest.mock('../../../../functions/aws/testAuth', () => ({
   testAuth: jest.fn(),
+}));
+jest.mock('../../../../functions/stripe/loadStripe', () => ({
+  loadStripe: jest.fn(),
 }));
 jest.mock('../../../../functions/aws/testUser', () => ({
   testUser: jest.fn(),
@@ -53,11 +53,12 @@ const accessToken = 'testAccessToken';
 const customerId = 'testCustomerID';
 const sourceId = 'testSourceID';
 const subscriptionId = 'testSubscriptionID';
+const subscriptionItemId = 'testSubscriptionItemID';
 const couponId = 'testCouponID';
 
-const token = { test: 'testToken ' };
+const token = { test: 'testToken' };
 const promoCode = 'testPromoCode';
-const plan = 'Basic_450';
+const plan = 'basic_plan';
 const email = 'test@test.com';
 const name = 'testName';
 const phone = '239-555-0000';
@@ -120,19 +121,6 @@ describe('handlers', () => {
         callback.mockReset();
       });
 
-      it('fails and returns error, when loadStripe throws error', async () => {
-        const error = {
-          code: 'testCode',
-          message: 'testMessage',
-        };
-        loadStripe.mockReturnValue(Promise.reject(error));
-
-        await put(event, null, callback);
-
-        expect(callback).toBeCalledWith(error, response);
-        expect(global.console.log).toMatchSnapshot();
-      });
-
       it('fails and returns error, when testAuth throws error', async () => {
         const error = {
           code: 'testCode',
@@ -147,18 +135,35 @@ describe('handlers', () => {
         expect(global.console.log).toMatchSnapshot();
       });
 
+      it('fails and returns error, when loadStripe throws error', async () => {
+        const error = {
+          code: 'testCode',
+          message: 'testMessage',
+        };
+        testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.reject(error));
+
+        await put(event, null, callback);
+
+        expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
+        expect(callback).toBeCalledWith(error, response);
+        expect(global.console.log).toMatchSnapshot();
+      });
+
       it('fails and returns error, when testUser throws error', async () => {
         const error = {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.reject(error));
 
         await put(event, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(callback).toBeCalledWith(error, response);
         expect(global.console.log).toMatchSnapshot();
@@ -184,13 +189,14 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.reject(error));
 
         await put(noEmailEvent, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).not.toBeCalled();
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(callback).toBeCalledWith(error, response);
@@ -202,14 +208,15 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.reject(error));
 
         await put(noPromoCodeEvent, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).not.toBeCalled();
         expect(getCustomer).toBeCalledWith(customerId);
@@ -222,13 +229,14 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan,
         }));
@@ -237,6 +245,7 @@ describe('handlers', () => {
         await put(event, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(getCustomer).toBeCalledWith(customerId);
@@ -254,6 +263,7 @@ describe('handlers', () => {
             stripe_customer_id: customerId,
           },
           body: {
+            test: 'test',
             promoCode,
             plan,
             name,
@@ -264,12 +274,13 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan,
         }));
@@ -278,6 +289,7 @@ describe('handlers', () => {
         await put(noTokenEmailEvent, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).not.toBeCalled();
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(getCustomer).toBeCalledWith(customerId);
@@ -292,12 +304,13 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan,
         }));
@@ -307,6 +320,7 @@ describe('handlers', () => {
         await put(noPromoCodeEvent, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).not.toBeCalled();
         expect(getCustomer).toBeCalledWith(customerId);
@@ -323,13 +337,14 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan: differentPlan,
         }));
@@ -339,6 +354,7 @@ describe('handlers', () => {
         await put(event, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(getCustomer).toBeCalledWith(customerId);
@@ -356,13 +372,14 @@ describe('handlers', () => {
           code: 'testCode',
           message: 'testMessage',
         };
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan: differentPlan,
         }));
@@ -373,6 +390,7 @@ describe('handlers', () => {
         await put(event, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(getCustomer).toBeCalledWith(customerId);
@@ -386,13 +404,14 @@ describe('handlers', () => {
       });
 
       it('correctly updates all stripe fields, except plan', async () => {
-        loadStripe.mockReturnValue(Promise.resolve());
         testAuth.mockReturnValue(Promise.resolve());
+        loadStripe.mockReturnValue(Promise.resolve());
         testUser.mockReturnValue(Promise.resolve());
         testCoupon.mockReturnValue(Promise.resolve());
         getCustomer.mockReturnValue(Promise.resolve({
           sourceId,
           subscriptionId,
+          subscriptionItemId,
           couponId,
           plan,
         }));
@@ -403,6 +422,7 @@ describe('handlers', () => {
         await put(event, null, callback);
 
         expect(testAuth).toBeCalledWith(accessToken);
+        expect(loadStripe).toBeCalled();
         expect(testUser).toBeCalledWith(email, customerId);
         expect(testCoupon).toBeCalledWith(promoCode);
         expect(getCustomer).toBeCalledWith(customerId);

@@ -14,5 +14,5 @@ module.exports.deleteDiscount = async (subscriptionId) => {
     return Promise.reject(error);
   }
 
-  return {};
+  return null;
 };

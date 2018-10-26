@@ -24,8 +24,6 @@ module.exports.put = async (event, context, callback) => {
 
   if (!error) {
     try {
-      console.log('loadStripe\n');
-
       await loadStripe();
     } catch (errorCatch) {
       error = errorCatch;
@@ -37,7 +35,6 @@ module.exports.put = async (event, context, callback) => {
   const customerId = event.cognitoPoolClaims.stripe_customer_id;
   let sourceId = null;
   let subscriptionId = null;
-  let subscriptionItemId = null;
   let couponId = null;
   let plan = null;
 
@@ -45,7 +42,7 @@ module.exports.put = async (event, context, callback) => {
     try {
       console.log('testUser\n', body.email, '\n', customerId, '\n');
 
-      await testUser(body.email, customerId); // eslint-disable-line no-await-in-loop
+      await testUser(body.email, customerId);
     } catch (errorCatch) {
       error = errorCatch;
     }
@@ -61,46 +58,7 @@ module.exports.put = async (event, context, callback) => {
     }
   }
 
-  if (!error && (body.token || body.email)) {
-    if (!error && !sourceId) {
-      try {
-        console.log('getCustomer\n', customerId, '\n');
-
-        ({ sourceId, subscriptionId, subscriptionItemId } = await getCustomer(customerId));
-
-        console.log(
-          'getCustomer - success\n',
-          sourceId,
-          '\n',
-          subscriptionId,
-          '\n',
-          subscriptionItemId,
-          '\n',
-        );
-
-        if (!sourceId || !subscriptionId || !subscriptionItemId) {
-          error = `getCustomer - field missing
-        sourceId: ${sourceId}
-        subscriptionId: ${subscriptionId}
-        subscriptionItemId: ${subscriptionItemId}`;
-        }
-      } catch (errorCatch) {
-        error = errorCatch;
-      }
-    }
-
-    if (!error) {
-      try {
-        console.log('updateCustomer\n', customerId, '\n', body, '\n');
-
-        await updateCustomer(customerId, body);
-      } catch (errorCatch) {
-        error = errorCatch;
-      }
-    }
-  }
-
-  if (!error && (!subscriptionId || !subscriptionItemId || !couponId || !plan)) {
+  if (!error) {
     try {
       console.log('getCustomer\n', customerId, '\n');
 
@@ -114,29 +72,26 @@ module.exports.put = async (event, context, callback) => {
         '\n',
         subscriptionId,
         '\n',
-        subscriptionItemId,
-        '\n',
         couponId,
         '\n',
         plan,
         '\n',
       );
 
-      if (!sourceId || !subscriptionId || !subscriptionItemId || !plan) {
+      if (!sourceId || !subscriptionId || !plan) {
         error = `getCustomer - field missing
-        sourceId: ${sourceId}
-        subscriptionId: ${subscriptionId}
-        subscriptionItemId: ${subscriptionItemId}
-        plan: ${plan}`;
+      sourceId: ${sourceId}
+      subscriptionId: ${subscriptionId}
+      plan: ${plan}`;
       }
     } catch (errorCatch) {
       error = errorCatch;
     }
   }
 
-  if (!error && body.promoCode && (!body.plan || body.plan === plan)) {
+  if (!error && (body.token || body.email)) {
     try {
-      console.log('updateSubscription\n', subscriptionId, '\n', body, '\n');
+      console.log('updateCustomer\n', customerId, '\n', body, '\n');
 
       await updateCustomer(customerId, body);
     } catch (errorCatch) {
@@ -170,7 +125,7 @@ module.exports.put = async (event, context, callback) => {
 
   if (!error && body.plan && body.plan !== plan) {
     try {
-      console.log('deleteSubscription\n', subscriptionItemId, '\n', body, '\n');
+      console.log('deleteSubscription\n', subscriptionId, '\n', body, '\n');
 
       await deleteSubscription(subscriptionId);
     } catch (errorCatch) {
