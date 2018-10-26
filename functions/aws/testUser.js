@@ -1,6 +1,8 @@
 const AWS = require('aws-sdk'); // eslint-disable-line
 const awsConfig = require('./aws.config.json');
 
+// make sure the user's username (email) isn't already
+// in use in Cognito
 module.exports.testUser = async (email, customerId) => {
   // keep as a global variable, to avoid
   // reloading when lambda instance is reused

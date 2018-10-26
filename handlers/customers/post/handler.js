@@ -6,7 +6,13 @@ const { addSubscription } = require('../../../functions/stripe/addSubscription')
 const { publishSNS } = require('../../../functions/aws/sns/publishSNS');
 const { errorResponse } = require('../../../functions/errorResponse');
 
-// add customer
+
+// verified that the new user's email does not already exist
+// in Cognito; create a new Stripe customer and add a subscription,
+// billing every quarter and prorating for the first quarter;
+// if provided, verify promo code and add to the subscription plan;
+// publish an SNS message, which is picked up by another lambda
+// function to add user to Cogntio and PostgreSQL database
 module.exports.post = async (event, context, callback) => {
   let error = null;
 
@@ -104,8 +110,9 @@ module.exports.post = async (event, context, callback) => {
   }
 
   // publish to SNS; sls_lambda_db listens for SNS and adds user
-  // to AWS Cognito and Postgres RDS; it's important to ensure Stripe
-  // is processed first; the customer should not pay and then rea
+  // to Cognito and PostgreSQL database; it's important to
+  // ensure Stripe is processed first; the customer should not
+  // pay and then rea
   if (!error) {
     try {
       console.log('publishSNS\n', customerId, '\n', bodyNoPassword, '\n');

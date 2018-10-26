@@ -22,7 +22,7 @@ custom:
   cors:
     origin: '*'
   arns:
-    cognito: 'arn:aws:cognito-idp:us-east-1: ...'
+    cognito: arn:aws:cognito-idp:us-east-1:...
 
 package:
   individually: true
