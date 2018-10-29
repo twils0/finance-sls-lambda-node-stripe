@@ -19,7 +19,7 @@ module.exports.getSecret = async (key) => {
         } else if (data && data.SecretString) {
           resolve(JSON.parse(data.SecretString));
         } else {
-          resolve(JSON.parse(data.SecretString));
+          reject('unexpected error - missing secret string');
         }
       });
     });

@@ -1,0 +1,685 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handlers users put correctly updates all stripe fields, except plan 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "basic_plan",
+      "
+",
+    ],
+    Array [
+      "updateCustomer
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "updateSubscription
+",
+      "testSubscriptionID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when addSubscription throws error, plan not null, and plan does not equal to current plan 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "testDifferentPlan",
+      "
+",
+    ],
+    Array [
+      "updateCustomer
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "deleteSubscription
+",
+      "testSubscriptionID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "addSubscription
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when deleteDiscount throws error and null promo code 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "basic_plan",
+      "
+",
+    ],
+    Array [
+      "updateCustomer
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": null,
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "deleteDiscount
+",
+      "testSubscriptionID",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when deleteSubscription throws error, plan not null, and plan does not equal to current plan 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "testDifferentPlan",
+      "
+",
+    ],
+    Array [
+      "updateCustomer
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "deleteSubscription
+",
+      "testSubscriptionID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when getCustomer throws error and no promo code in body 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when loadStripe throws error 1`] = `[MockFunction]`;
+
+exports[`handlers users put fails and returns error, when testAuth throws error 1`] = `[MockFunction]`;
+
+exports[`handlers users put fails and returns error, when testCoupon throws error and no email in body 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when testUser throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when updateCustomer throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "basic_plan",
+      "
+",
+    ],
+    Array [
+      "updateCustomer
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users put fails and returns error, when updateSubscription throws error and no token or email 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testCustomerID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testSourceID",
+      "
+",
+      "testSubscriptionID",
+      "
+",
+      "testCouponID",
+      "
+",
+      "basic_plan",
+      "
+",
+    ],
+    Array [
+      "updateSubscription
+",
+      "testSubscriptionID",
+      "
+",
+      Object {
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "test": "test",
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;

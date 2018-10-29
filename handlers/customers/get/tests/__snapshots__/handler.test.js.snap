@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handlers users get correctly responds with customer info 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testUserID",
+      "
+",
+    ],
+    Array [
+      "getCustomer - success
+",
+      "testNameOnCard",
+      "
+",
+      "testPromoCode",
+      "
+",
+      true,
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users get fails and returns error, when getCustomer returns an error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "getCustomer
+",
+      "testUserID",
+      "
+",
+    ],
+    Array [
+      Object {
+        "code": "testCode",
+        "message": "testMessage",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users get fails and returns error, when loadStripe throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users get fails and returns error, when testAuth throws error 1`] = `[MockFunction]`;

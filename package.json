@@ -1,6 +1,6 @@
 {
   "name": "finance-sls-lambda-node-stripe",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "api to handle stripe workflows, using aws lambda functions (node), managed by serverless",
   "author": "twils0",
   "repository": {
@@ -13,6 +13,7 @@
   "homepage": "https://github.com/twils0/finance-sls-lambda-node-stripe#readme",
   "scripts": {
     "test": "jest",
+    "test_coverage": "jest -- --coverage",
     "test_watch": "jest --watch"
   },
   "jest": {

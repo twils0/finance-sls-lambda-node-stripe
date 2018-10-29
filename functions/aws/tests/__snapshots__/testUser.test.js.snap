@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`functions aws testUser fails and returns a 'UsernameExistsException' error when not provided a userId 1`] = `
+Object {
+  "code": "UsernameExistsException",
+  "message": "This email is already in use",
+}
+`;
+
+exports[`functions aws testUser fails and returns a 'UsernameExistsException' error when provided userId that does not match 1`] = `
+Object {
+  "code": "UsernameExistsException",
+  "message": "This email is already in use",
+}
+`;

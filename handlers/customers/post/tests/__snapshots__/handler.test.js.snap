@@ -1,0 +1,587 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handlers users post correctly publishes an sns topic 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "addCustomer
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+    ],
+    Array [
+      "addCustomer - success
+",
+      "testCustomerID",
+    ],
+    Array [
+      "addSubscription
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "publishSNS
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when addCustomer returns an error and does not call testCoupon when no promoCode 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+    Array [
+      "addCustomer
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when addSubscription returns an error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "addCustomer
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+    ],
+    Array [
+      "addCustomer - success
+",
+      "testCustomerID",
+    ],
+    Array [
+      "addSubscription
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when loadStripe throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when publishSNS returns an error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+    Array [
+      "addCustomer
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+    ],
+    Array [
+      "addCustomer - success
+",
+      "testCustomerID",
+    ],
+    Array [
+      "addSubscription
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+      "
+",
+    ],
+    Array [
+      "publishSNS
+",
+      "testCustomerID",
+      "
+",
+      Object {
+        "email": "test@test.com",
+        "name": "testName",
+        "phone": "239-555-0000",
+        "plan": "basic_plan",
+        "promoCode": "testPromoCode",
+        "token": Object {
+          "test": "testToken ",
+        },
+      },
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when testCoupon throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+    Array [
+      "testCoupon
+",
+      "testPromoCode",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and returns error, when testUser throws error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+    Array [
+      "testUser
+",
+      "test@test.com",
+      "
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'email' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide an 'email' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'email' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'name' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide an 'name' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'name' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'password' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide an 'password' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'password' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'phone' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide an 'phone' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'phone' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'plan' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide a 'plan' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'plan' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'token' key in body 1`] = `
+Object {
+  "code": "invalid_body",
+  "message": "Please provide a 'token' key in the body of your request.",
+}
+`;
+
+exports[`handlers users post fails and throws an error when missing 'token' key in body 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "loadStripe
+",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
