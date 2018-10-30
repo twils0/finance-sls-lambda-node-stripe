@@ -6,14 +6,14 @@ The overall project allows users to search for equities, by ticker, name, sector
 
 finance-sls-lambda-node-stripe is a collection of AWS Lambda functions, running Node and managed by Serverless, that handle API calls from a client and then interact with Stripe's Node API library.
 
-Each Lambda function handles an API call from a different HTTP method from AWS API Gateway. API Gateway authenticates using AWS Cognito, checking the idToken provided by the client. Each function, except for the POST method, authenticates with AWS Cognito a second time, verifying the accessToken provided by the client, which is updated much more frequently than idToken.
+Each Lambda function handles API calls from AWS API Gateway. API Gateway authenticates certain functions using AWS Cognito, verifying the 'id' token provided by the client. These functions are then authenticated with AWS Cognito a second time, verifying the 'access' token provided by the client, which is updated much more frequently than the 'id' token.
 
 - /customers
 
-  - POST: signs up a new user;
+  - DELETE: (authenticated) deletes the user's Stripe information;
 
-  - GET: retreives the user's Stripe information;
+  - GET: (authenticated) retreives the user's Stripe information (name on credit card, promo code, and a boolean to indicate if the promo code is valid);
 
-  - PUT: updates the user's Stripe information;
+  - POST: adds a new customer to Stripe, creates a new subscription for that customer, and applies a promo code to that subscription, if provided;
 
-  - DELETE: deletes the user's Stripe information;
+  - PUT: (authenticated) updates the user's Stripe information (name on card, email, credit card, promo code, etc.);
